@@ -1,0 +1,1 @@
+Act as the orchestrator. Initialize a Claude Haiku subagent and task it with executing the following specific plan: [INSERT PLAN HERE]. You are responsible for managing the subagent's execution lifecycle, handling any runtime errors, verifying that all steps of the plan are fully completed, and reporting the final output and status back to me.
