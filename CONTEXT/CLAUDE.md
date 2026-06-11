@@ -18,6 +18,11 @@ Sole auto-loaded context file. Principles below; all facts, runbooks, and histor
 ## Planning
 When Plan Mode is active, before producing any plan, load the designated planning guidelines and follow their instructions exactly when generating the execution plan.
 
+### Post-completion: sync stack documentation
+Once a plan is fully completed, automatically update all cross-referenced stack documentation —
+internal knowledge bases, KB files, and every related `.md` file affected by the changes — so the
+designated knowledge base stays the source of truth.
+
 ## Stack at a glance
 
 *Host details:* [Define environment/OS, architecture, network placement, and resource allocations here]

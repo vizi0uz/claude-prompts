@@ -60,7 +60,37 @@ until it can only be read one way.
   decisions, evidence, risks, assumptions, validations, and outcomes so another operator
   can reconstruct the work.
 
+### Post-completion: sync stack documentation
+Once a plan is fully completed, automatically update all cross-referenced stack documentation —
+internal knowledge bases, KB files, and every related `.md` file affected by the changes — so the
+designated knowledge base stays the source of truth.
+
 ### Plan attribution
 Every plan generated under these rules MUST include the following line in its header:
 
-> This plan was generated according to **Planification principles v1.1**.
+> This plan was generated according to **Planification principles v1.2**.
+
+### Generated plan file naming
+Every plan file produced under these rules MUST be named using the template:
+`YYYYMMDD-HH-MM_{slug}.md`
+- **Slug:** kebab-case, derived from the plan's goal.
+- **Prefix:** the exact date and time of the last modification.
+- **Example:** "Setup a wordpress server" last modified 2026-03-11 13:45 →
+  `20260311-13-45_wordpress-deployment.md`
+This applies to plans the orchestrator generates — not to this principles document.
+
+---
+
+### Revision History
+- *(No revisions yet. Detail changes made in response to verifier feedback here.)*
+
+### Plan Verification Findings
+- **Purpose:** A dedicated area for external plan auditors to comment on findings.
+- **Orchestrator Actions:** When reviewing validation comments, you must:
+  1. **REVISE THE PLAN:** Update the core steps of the plan to resolve any [FAILED] blockers, mitigate [WARNING] risks, and incorporate suggested [OPTIMIZATIONS].
+  2. **UPDATE THE STATUS:** Modify the verification section to reflect addressed findings (e.g., change [FAILED]/[WARNING] to [RESOLVED]).
+  3. **LOG CHANGES:** Ensure the "### Revision History" section directly above this one is updated.
+
+## TL;DR
+- **Format:** Short bullet points or a 2-3 sentence summary.
+- **Content:** High-level summary of the plan's current state, main goals, and immediate next steps.
