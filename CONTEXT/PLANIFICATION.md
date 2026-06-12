@@ -68,7 +68,7 @@ designated knowledge base stays the source of truth.
 ### Plan attribution
 Every plan generated under these rules MUST include the following line in its header:
 
-> This plan was generated according to **Planification principles v1.2**.
+> This plan was generated according to **Planification principles v1.3**.
 
 ### Generated plan file naming
 Every plan file produced under these rules MUST be named using the template:
@@ -79,10 +79,36 @@ Every plan file produced under these rules MUST be named using the template:
   `20260311-13-45_wordpress-deployment.md`
 This applies to plans the orchestrator generates — not to this principles document.
 
+### Plan file naming — precedence in Plan Mode (authoritative)
+When Plan Mode is active, the harness pre-assigns the plan file path (a random slug,
+not timestamped) and declares it the **sole file you may edit**. That constraint is
+permission-enforced and **OVERRIDES the naming template above while Plan Mode is active.**
+
+- WRITE the plan to the harness-assigned path exactly. Do NOT rename it and do NOT
+  create a second file while in Plan Mode — both violate the single-file edit rule and
+  will fail or orphan a stray file.
+- Do NOT flip-flop if challenged on naming: during Plan Mode the harness path IS correct.
+  State the precedence rather than capitulating.
+- AFTER `ExitPlanMode` is approved and edits are unblocked, rename the plan as the FIRST
+  execution step — this is the one allowed rename:
+  `plans/{harness-slug}.md` → `plans/{YYYYMMDD-HH-MM}_{slug}.md`
+  using the file's last-modified time for the prefix and a kebab-case slug from the goal.
+  (Caveat: the harness UI may still reference the original path; this is expected.)
+
 ---
 
-### Revision History
-- *(No revisions yet. Detail changes made in response to verifier feedback here.)*
+## Principles Changelog  *(versions of THIS document — distinct from any plan's Revision History)*
+- **v1.3 (2026-06-11):** Added "Plan file naming — precedence in Plan Mode" subsection; scoped Revision History to plans, added this changelog and the "Plan Template Blocks" grouping.
+- **v1.2:** Baseline.
+
+---
+
+## Plan Template Blocks — copy verbatim into every generated plan
+
+### Revision History  *(plan-scoped — lives in each generated plan, NOT in this principles document)*
+- **Purpose:** Log how THIS PLAN changed in response to Plan Verification Findings (verifier/auditor feedback). One line per revision: which [FAILED]/[WARNING]/[OPTIMIZATION] prompted it + what changed.
+- **Not for:** Versioning the principles document itself — see `## Principles Changelog`. Never record doc version bumps here.
+- *(No revisions yet.)*
 
 ### Plan Verification Findings
 - **Purpose:** A dedicated area for external plan auditors to comment on findings.
@@ -91,6 +117,6 @@ This applies to plans the orchestrator generates — not to this principles docu
   2. **UPDATE THE STATUS:** Modify the verification section to reflect addressed findings (e.g., change [FAILED]/[WARNING] to [RESOLVED]).
   3. **LOG CHANGES:** Ensure the "### Revision History" section directly above this one is updated.
 
-## TL;DR
+### TL;DR
 - **Format:** Short bullet points or a 2-3 sentence summary.
 - **Content:** High-level summary of the plan's current state, main goals, and immediate next steps.
