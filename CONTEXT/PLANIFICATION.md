@@ -68,36 +68,35 @@ designated knowledge base stays the source of truth.
 ### Plan attribution
 Every plan generated under these rules MUST include the following line in its header:
 
-> This plan was generated according to **Planification principles v1.3**.
+> This plan was generated according to **Planification principles v1.4**.
 
-### Generated plan file naming
-Every plan file produced under these rules MUST be named using the template:
+### Plan file naming (authoritative)
+Every plan file produced under these rules MUST be named:
 `YYYYMMDD-HH-MM_{slug}.md`
 - **Slug:** kebab-case, derived from the plan's goal.
-- **Prefix:** the exact date and time of the last modification.
+- **Prefix:** the exact date and time of the file's last modification.
 - **Example:** "Setup a wordpress server" last modified 2026-03-11 13:45 →
   `20260311-13-45_wordpress-deployment.md`
 This applies to plans the orchestrator generates — not to this principles document.
 
-### Plan file naming — precedence in Plan Mode (authoritative)
-When Plan Mode is active, the harness pre-assigns the plan file path (a random slug,
-not timestamped) and declares it the **sole file you may edit**. That constraint is
-permission-enforced and **OVERRIDES the naming template above while Plan Mode is active.**
+**A plan is not correctly produced until its filename matches this convention.**
+Filename gate: the final filename MUST match `^\d{8}-\d{2}-\d{2}_[a-z0-9-]+\.md$`.
+If it does not, the rename has not been done — perform it now before reporting the plan complete.
 
-- WRITE the plan to the harness-assigned path exactly. Do NOT rename it and do NOT
-  create a second file while in Plan Mode — both violate the single-file edit rule and
-  will fail or orphan a stray file.
-- Do NOT flip-flop if challenged on naming: during Plan Mode the harness path IS correct.
-  State the precedence rather than capitulating.
-- AFTER `ExitPlanMode` is approved and edits are unblocked, rename the plan as the FIRST
-  execution step — this is the one allowed rename:
-  `plans/{harness-slug}.md` → `plans/{YYYYMMDD-HH-MM}_{slug}.md`
-  using the file's last-modified time for the prefix and a kebab-case slug from the goal.
-  (Caveat: the harness UI may still reference the original path; this is expected.)
+**When Plan Mode is active:** the harness pre-assigns the plan file path (a random slug) and
+that path is the **sole file you may edit** — write the plan there without renaming it during
+planning. The moment `ExitPlanMode` is approved and edits are unblocked, perform the one
+allowed rename as the first action:
+`plans/{harness-slug}.md` → `plans/{YYYYMMDD-HH-MM}_{slug}.md`
+using the file's last-modified time for the prefix and a kebab-case slug from the goal.
+(The harness UI may still reference the original path; this is expected.)
+If challenged on the harness path during Plan Mode, do not flip-flop — state that the rename
+happens after approval, not during planning.
 
 ---
 
 ## Principles Changelog  *(versions of THIS document — distinct from any plan's Revision History)*
+- **v1.4 (2026-06-25):** Merged two naming sections into one authoritative `### Plan file naming` section; reframed rename as completion criterion with explicit filename gate; foregrounded positive action over prohibitions.
 - **v1.3 (2026-06-11):** Added "Plan file naming — precedence in Plan Mode" subsection; scoped Revision History to plans, added this changelog and the "Plan Template Blocks" grouping.
 - **v1.2:** Baseline.
 
